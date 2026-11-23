@@ -221,3 +221,13 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# AgriMeca : jamais versionnés
+profiles.yml
+.databrickscfg
+denylist.txt
+landing/
+data/
+*.csv
+*.csv.gz
+*.parquet
