@@ -63,8 +63,27 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "HttpReadSettings",
+							"requestMethod": "GET"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
 					"enableStaging": false
-				}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_http_csv",
+						"type": "DatasetReference",
+						"parameters": {
+							"relative_url": "data/EXR/D.USD+GBP+BRL+INR+PLN+CAD.EUR.SP00.A?startPeriod=2026-11-17&endPeriod=2026-11-22&format=csvdata"
+						}
+					}
+				]
 			}
 		],
 		"parameters": {
