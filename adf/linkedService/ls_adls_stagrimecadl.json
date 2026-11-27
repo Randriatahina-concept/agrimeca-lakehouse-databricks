@@ -1,0 +1,11 @@
+{
+	"name": "ls_adls_stagrimecadl",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://stagrimecadl.dfs.core.windows.net/"
+		}
+	}
+}

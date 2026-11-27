@@ -1,0 +1,31 @@
+{
+	"name": "pl_test_kv",
+	"properties": {
+		"activities": [
+			{
+				"name": "Test API",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": true,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"method": "GET",
+					"url": "https://kv-agrimeca-8033.vault.azure.net/secrets/erp-base-url?api-version=7.4",
+					"authentication": {
+						"type": "MSI",
+						"resource": "https://vault.azure.net"
+					}
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2026-11-27T19:24:41Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,16 @@
+{
+	"name": "adf-agrimeca-charles",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true,
+			"isExplicitlySet": false
+		}
+	},
+	"location": "francecentral",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "20d39779-9704-4a14-8f07-a98ccaa72977",
+		"tenantId": "4c7873a0-f161-47b8-9f96-5ffbb90dc105"
+	}
+}

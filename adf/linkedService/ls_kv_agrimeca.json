@@ -1,0 +1,11 @@
+{
+	"name": "ls_kv_agrimeca",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://kv-agrimeca-8033.vault.azure.net/"
+		}
+	}
+}
