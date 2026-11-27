@@ -12,10 +12,10 @@
 			"table": {
 				"type": "string"
 			},
-			"filename": {
+			"file_name": {
 				"type": "string"
 			},
-			"load": {
+			"load_date": {
 				"type": "string"
 			}
 		},
@@ -23,7 +23,8 @@
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "AzureBlobFSLocation"
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "landing"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
