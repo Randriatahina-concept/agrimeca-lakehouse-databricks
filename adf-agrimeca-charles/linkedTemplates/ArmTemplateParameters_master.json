@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "adf-agrimeca-charles"
+		},
+		"ls_adls_stagrimecadl_properties_typeProperties_url": {
+			"value": "https://stagrimecadl.dfs.core.windows.net/"
+		},
+		"ls_http_ecb_properties_typeProperties_url": {
+			"value": "https://data-api.ecb.europa.eu/service/"
+		},
+		"ls_kv_agrimeca_properties_typeProperties_baseUrl": {
+			"value": "https://kv-agrimeca-8033.vault.azure.net/"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
