@@ -1,0 +1,35 @@
+{
+	"name": "ds_adls_landing_csvgz",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_adls_stagrimecadl",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"source": {
+				"type": "string"
+			},
+			"table": {
+				"type": "string"
+			},
+			"filename": {
+				"type": "string"
+			},
+			"load": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
