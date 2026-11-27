@@ -1,0 +1,66 @@
+{
+	"name": "pl_ingest_ecb",
+	"properties": {
+		"activities": [
+			{
+				"name": "set_load_date",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "v_load_date",
+					"value": {
+						"value": "@coalesce(pipeline().parameters.load_date,formatDateTime(utcNow(),'yyyy-MM-dd'))",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "set_start_period",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "set_load_date",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "v_start_period",
+					"value": {
+						"value": "@formatDateTime(addDays(variables('v_load_date'),mul(pipeline().parameters.days_back,-1),'yyyy-MM-dd'))",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"load_date": {
+				"type": "string"
+			},
+			"days_back": {
+				"type": "int",
+				"defaultValue": 5
+			}
+		},
+		"variables": {
+			"v_load_date": {
+				"type": "String"
+			},
+			"v_start_period": {
+				"type": "String"
+			}
+		},
+		"annotations": []
+	}
+}
