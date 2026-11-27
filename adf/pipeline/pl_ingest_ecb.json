@@ -73,7 +73,26 @@
 							"type": "DelimitedTextReadSettings"
 						}
 					},
-					"enableStaging": false
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
 				},
 				"inputs": [
 					{
@@ -82,6 +101,20 @@
 						"parameters": {
 							"relative_url": {
 								"value": "@concat('data/EXR/D.USD+GBP+BRL+INR+PLN+CAD.EUR.SP00.A?startPeriod=',variables('v_start_period'),'&endPeriod=',variables('v_load_date'),'&format=csvdata')",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_adls_landing_csvgz",
+						"type": "DatasetReference",
+						"parameters": {
+							"source": "ecb",
+							"table": "exchange_rates",
+							"load_date": {
+								"value": "@variables('v_load_date')",
 								"type": "Expression"
 							}
 						}
