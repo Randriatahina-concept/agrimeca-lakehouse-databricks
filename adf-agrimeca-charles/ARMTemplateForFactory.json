@@ -25,6 +25,78 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/pl_ingest_ecb')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "set_load_date",
+						"type": "SetVariable",
+						"dependsOn": [],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "v_load_date",
+							"value": {
+								"value": "@coalesce(pipeline().parameters.load_date,formatDateTime(utcNow(),'yyyy-MM-dd'))",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "set_start_period",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "set_load_date",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "v_start_period",
+							"value": {
+								"value": "@formatDateTime(addDays(variables('v_load_date'),mul(pipeline().parameters.days_back,-1),'yyyy-MM-dd'))",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"parameters": {
+					"load_date": {
+						"type": "string"
+					},
+					"days_back": {
+						"type": "int",
+						"defaultValue": 5
+					}
+				},
+				"variables": {
+					"v_load_date": {
+						"type": "String"
+					},
+					"v_start_period": {
+						"type": "String"
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/pl_test_kv')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -56,9 +128,60 @@
 				"policy": {
 					"elapsedTimeMetric": {}
 				},
-				"annotations": []
+				"annotations": [],
+				"lastPublishTime": "2026-11-27T19:24:41Z"
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_adls_landing_csvgz')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_adls_stagrimecadl",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"source": {
+						"type": "string"
+					},
+					"table": {
+						"type": "string"
+					},
+					"file_name": {
+						"type": "string"
+					},
+					"load_date": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@dataset().file_name",
+							"type": "Expression"
+						},
+						"folderPath": {
+							"value": "@concat(dataset().source,'/',dataset().table,'/load_date=',dataset().load_date)",
+							"type": "Expression"
+						},
+						"fileSystem": "landing"
+					},
+					"columnDelimiter": ",",
+					"compressionCodec": "gzip",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ls_adls_stagrimecadl')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/ds_http_csv')]",
