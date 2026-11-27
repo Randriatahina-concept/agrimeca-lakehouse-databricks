@@ -38,7 +38,7 @@
 				"typeProperties": {
 					"variableName": "v_start_period",
 					"value": {
-						"value": "@formatDateTime(addDays(variables('v_load_date'),mul(pipeline().parameters.days_back,-1),'yyyy-MM-dd'))",
+						"value": "@addDays(variables('v_load_date'), mul(pipeline().parameters.days_back, -1), 'yyyy-MM-dd')",
 						"type": "Expression"
 					}
 				}
