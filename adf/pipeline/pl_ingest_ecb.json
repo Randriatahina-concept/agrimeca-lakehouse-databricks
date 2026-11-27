@@ -113,6 +113,10 @@
 						"parameters": {
 							"source": "ecb",
 							"table": "exchange_rates",
+							"file_name": {
+								"value": "'ecb_exr_'{variables('v_load_date')}'.csv.gz')",
+								"type": "Expression"
+							},
 							"load_date": {
 								"value": "@variables('v_load_date')",
 								"type": "Expression"
