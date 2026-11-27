@@ -114,7 +114,7 @@
 							"source": "ecb",
 							"table": "exchange_rates",
 							"file_name": {
-								"value": "'ecb_exr_'{variables('v_load_date')}'.csv.gz')",
+								"value": "@concat('ecb_exr_',variables('v_load_date'),'.csv.gz')",
 								"type": "Expression"
 							},
 							"load_date": {
