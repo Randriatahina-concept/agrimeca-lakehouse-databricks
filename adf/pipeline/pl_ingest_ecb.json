@@ -80,7 +80,10 @@
 						"referenceName": "ds_http_csv",
 						"type": "DatasetReference",
 						"parameters": {
-							"relative_url": "data/EXR/D.USD+GBP+BRL+INR+PLN+CAD.EUR.SP00.A?startPeriod=2026-11-17&endPeriod=2026-11-22&format=csvdata"
+							"relative_url": {
+								"value": "@concat('data/EXR/D.USD+GBP+BRL+INR+PLN+CAD.EUR.SP00.A?startPeriod=',variables('v_start_period'),'&endPeriod=',variables('v_load_date'),'&format=csvdata')",
+								"type": "Expression"
+							}
 						}
 					}
 				]
